@@ -1,40 +1,73 @@
 # Sales Store Automated Framework (Educational Exercise)
 
-Welcome to the Sales Store Automated Framework. This project is designed as an educational exercise for building and understanding automated testing frameworks using Selenium with a strong focus on maintainability and scalability through the Page Object Model (POM) design pattern.
+This project is designed as an **educational exercise** for building an automated testing framework using **Selenium** and the **Page Object Model (POM)** design pattern. It automates core functionalities of an online store, including searching for products, adding them to the cart, and proceeding to checkout.
 
-Disclaimer: This project is for educational purposes only and is not intended for production use. It was created as a learning exercise to demonstrate key automation testing techniques.
+> **Disclaimer**: This project is for **educational purposes** only.
 
-Table of Contents
-Project Overview
-Technologies Used
-Project Structure
-Installation and Setup
-Running Tests
-Contributing
-Project Overview
-This project provides an automated testing framework for a hypothetical sales store web application. It automates various user flows such as searching for products, adding products to the cart, and proceeding to checkout. The project adopts the Page Object Model (POM) pattern to enhance test maintainability, readability, and scalability.
+---
 
-The main goals of this project are:
+## Getting Started
 
-To automate core functionalities of a web-based store for learning purposes.
-To utilize best practices in test automation.
-To make the tests easy to maintain and extend with the POM pattern.
-Note: This project is part of an educational exercise and is not representative of a real-world application or production environment.
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-Technologies Used
-The following technologies and libraries are used in this project:
+### Prerequisites
 
-Python: The programming language used to develop the test framework.
-Selenium WebDriver: Used to automate browser interactions.
-PyTest: A testing framework to run and manage the tests.
-WebDriver Manager: Automatically handles the download and setup of web drivers.
-Page Object Model (POM): A design pattern used to model the pages of the web application as classes, improving code reusability and maintainability.
-PyTest HTML Reports: Generate detailed test reports in HTML format.
-Project Structure
-The project follows a modular structure to separate concerns and enhance readability:
+You will need the following to set up the project:
 
-plaintext
-Copy code
+- **Python 3.x**: The programming language used to build the framework.
+- **pip**: Python package manager (usually comes with Python).
+- **Virtual Environment**: Recommended to isolate dependencies.
+- **Git**: For version control and cloning the repository.
+
+#### Example:
+
+Install Python 3.x from the official [Python website](https://www.python.org/downloads/).
+
+To install pip and virtual environment:
+
+```bash
+pip install virtualenv
+```
+
+### Installing
+
+A step-by-step series of instructions to get a development environment running:
+
+#### 1. Clone the repository:
+
+```bash
+git clone https://github.com/PonchoAlpha00/Sales_store_automated_framework.git
+cd Sales_store_automated_framework
+```
+
+#### 2. Set up a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+#### 3. Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 4. Set up the browser drivers:
+
+The WebDriver Manager is used to automatically handle the browser driver setup. No additional steps are required for Chrome/Firefox drivers.
+
+### Finished Setup
+
+After following these steps, your environment will be ready to run the automated tests included in this project.
+
+---
+
+## Project Structure
+
+This project follows a well-structured, modular design to separate the various concerns in automated testing. Here’s an overview of the directory structure:
+
+```plaintext
 .
 ├── pages/                # Page Objects for each page in the application
 │   ├── home_page.py      # HomePage class handling search functionality
@@ -51,53 +84,108 @@ Copy code
 ├── reports/              # Folder to store HTML reports
 ├── requirements.txt      # Dependencies for the project
 └── README.md             # This README file
-Page Object Model (POM)
-The Page Object Model (POM) is used to represent the web pages of the application as objects. Each page object contains methods to interact with elements on the page, abstracting the complexity of selectors and making tests more readable and maintainable.
+```
 
-Example:
+### Explanation of Key Components:
 
-HomePage: Contains methods for interacting with the search bar, search button, and typeahead suggestions.
-ProductPage: Contains methods to interact with product details, add items to the cart, and proceed to checkout.
-Installation and Setup
-To get started with this project, follow these steps:
+1. **Page Objects (POM)**: 
+   - The **Page Object Model (POM)** design pattern is used to encapsulate all the elements and actions for each page. This improves the maintainability of tests by separating the logic for interacting with the page elements from the tests themselves.
+   
+   - **pages/** directory contains page classes like `home_page.py` and `product_page.py`, which model specific pages of the web application.
 
-1. Clone the Repository
-bash
-Copy code
-git clone https://github.com/PonchoAlpha00/Sales_store_automated_framework.git
-cd Sales_store_automated_framework
-2. Set Up a Virtual Environment
-bash
-Copy code
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-3. Install the Dependencies
-bash
-Copy code
-pip install -r requirements.txt
-4. WebDriver Setup
-The WebDriver Manager is used to automatically handle the download and setup of the browser drivers (e.g., ChromeDriver). No manual setup is required.
+2. **Test Cases**:
+   - **tests/** directory contains the actual test cases, which use the methods defined in the Page Object classes to interact with the web application. Each test focuses on a specific functionality (e.g., searching for products, adding items to the cart).
 
-Running Tests
-To run the tests, use the following command:
+3. **Utility Classes**:
+   - The **utils/browser_setup.py** contains the logic for setting up the browser (e.g., ChromeDriver), including configuration for headless mode and browser options.
 
-bash
-Copy code
+4. **Configuration**:
+   - **config/config.py** contains configuration settings such as base URLs, implicit wait times, and browser options. These can be easily adjusted based on the environment or requirements.
+
+---
+
+## Running the Tests
+
+To run the automated tests for this system, use the following steps.
+
+### End-to-End Tests
+
+These tests simulate user interactions with the sales store web application, such as searching for products, adding items to the cart, and proceeding to checkout.
+
+#### Example:
+
+To run all tests:
+
+```bash
 pytest
-Generating HTML Reports
-To generate HTML reports of the test runs, use the following command:
+```
 
-bash
-Copy code
+To generate an HTML report of the test run:
+
+```bash
 pytest --html=reports/report.html --self-contained-html
-Running Specific Tests
-You can also run a specific test or a group of tests using markers. For example, to run smoke tests:
+```
 
-bash
-Copy code
-pytest -m "smoke"
-Contributing
-Contributions are welcome! If you’d like to contribute, please fork the repository, make changes, and submit a pull request.
+### Coding Style Tests
 
-License
-This project is licensed under the MIT License.
+The framework follows **PEP 8** coding standards. You can run linting tools like `flake8` to ensure the code adheres to these standards.
+
+#### Example:
+
+To install `flake8` and run the style checks:
+
+```bash
+pip install flake8
+flake8 .
+```
+
+---
+
+## Deployment
+
+This project is intended for educational purposes and local execution only. There are no instructions for deploying it on a live system, as it is not a production-ready application.
+
+---
+
+## Built With
+
+- **Selenium WebDriver** - Browser automation tool.
+- **PyTest** - Framework for writing and running tests.
+- **WebDriver Manager** - Handles automatic driver management.
+- **Page Object Model (POM)** - Design pattern used for structuring the project.
+- **PyTest HTML Reports** - For generating HTML reports of test results.
+
+---
+
+## Contributing
+
+If you wish to contribute, please fork the repository, create a new branch, and submit a pull request.
+
+---
+
+## Versioning
+
+This project does not follow a specific versioning system. It is meant for educational purposes. However, you may implement versioning if necessary using [SemVer](http://semver.org/).
+
+---
+
+## Authors
+
+- **Alfonso Armando Perez Cerda** - Initial work for this educational project.
+
+See the list of [contributors](https://github.com/PonchoAlpha00/Sales_store_automated_framework/graphs/contributors) who participated in this project.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+
+---
+
+## Acknowledgments
+
+- Thanks to the creators of the tools used in this project.
+- Hat tip to the open-source community for providing resources and support.
+
+---
